@@ -17,7 +17,7 @@
     "app": "npm run dev --workspace @agent-memory-mcp/desktop",
     "app:build": "npm run dist --workspace @agent-memory-mcp/desktop",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
-    "typecheck": "npm run typecheck --workspaces --if-present",
+    "typecheck": "npm run build --workspace @agent-memory-mcp/core && npm run typecheck --workspaces --if-present",
     "start": "npm run start --workspace agent-memory-mcp"
   },
   "repository": {
