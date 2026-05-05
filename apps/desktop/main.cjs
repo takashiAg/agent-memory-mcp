@@ -6,6 +6,7 @@ let window = null;
 let storage = null;
 
 const rootDir = path.resolve(__dirname, "../..");
+const isDev = !app.isPackaged;
 
 async function loadStorage() {
   if (!storage) {
@@ -107,12 +108,15 @@ function registerIpc() {
 }
 
 app.whenReady().then(() => {
-  if (process.platform === "darwin" && app.dock) {
+  if (!isDev && process.platform === "darwin" && app.dock) {
     app.dock.hide();
   }
   registerIpc();
   createWindow();
   createTray();
+  if (isDev) {
+    showWindow();
+  }
 });
 
 app.on("window-all-closed", (event) => {
