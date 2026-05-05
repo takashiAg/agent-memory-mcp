@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "npm run build --workspaces --if-present",
+    "dev:all": "concurrently --names mcp,desktop --prefix-colors blue,green \"npm run start\" \"npm run app\"",
     "inspect": "npm run inspect --workspace agent-memory-mcp --",
     "app": "npm run dev --workspace @agent-memory-mcp/desktop",
     "app:build": "npm run dist --workspace @agent-memory-mcp/desktop",
@@ -33,6 +34,7 @@
   "homepage": "https://github.com/takashiAg/agent-memory-mcp#readme",
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "concurrently": "^9.2.1",
     "markdownlint-cli2": "^0.22.1",
     "typescript": "^6.0.3"
   },
