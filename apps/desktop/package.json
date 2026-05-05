@@ -1,16 +1,19 @@
 {
-  "name": "agent-memory-mcp-menubar",
-  "version": "0.1.0",
+  "name": "@agent-memory-mcp/desktop",
+  "version": "1.0.0",
   "private": true,
-  "description": "Menu bar memory manager for agent-memory-mcp.",
+  "description": "Menu bar desktop app for agent-memory-mcp.",
   "main": "main.cjs",
   "scripts": {
-    "dev": "npm --prefix ../.. run build && electron .",
+    "dev": "npm run build --workspace @agent-memory-mcp/core && electron .",
     "sync-dist": "node scripts/sync-dist.cjs",
-    "dist": "npm --prefix ../.. run build && npm run sync-dist && electron-builder"
+    "dist": "npm run build --workspace @agent-memory-mcp/core && npm run sync-dist && electron-builder"
+  },
+  "dependencies": {
+    "@agent-memory-mcp/core": "1.0.0"
   },
   "devDependencies": {
-    "electron": "^37.0.0",
+    "electron": "^35.7.5",
     "electron-builder": "^26.0.0"
   },
   "build": {
@@ -19,7 +22,7 @@
     "files": [
       "main.cjs",
       "preload.cjs",
-      "vendor/dist/**",
+      "vendor/core/**",
       "renderer/**",
       "package.json"
     ],

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { MemoryStorage } from "./storage.js";
+import { MemoryStorage } from "@agent-memory-mcp/core";
 
 const args = process.argv.slice(2);
 const namespace = readOption("--namespace");

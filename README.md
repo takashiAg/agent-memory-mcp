@@ -38,13 +38,22 @@ The Model 型 SaaS の業務文脈を、Codex や Claude Code などの MCP 対�
 - MCP
 - SQLite
 - SQLite FTS5
+- Electron
 
-## 使い方
+## 構成
+
+```text
+packages/core   # SQLite storage, types, secret guard
+packages/mcp    # MCP server CLI
+apps/desktop    # Desktop memory manager
+```
+
+## MCP の使い方
 
 ```bash
 npm install
 npm run build
-node dist/server.js
+npm run start
 ```
 
 Codex 設定例:
@@ -52,7 +61,7 @@ Codex 設定例:
 ```toml
 [mcp_servers.agent_memory]
 command = "node"
-args = ["/path/to/agent-memory-mcp/dist/server.js"]
+args = ["/path/to/agent-memory-mcp/packages/mcp/dist/server.js"]
 enabled = true
 ```
 
@@ -64,11 +73,10 @@ npm run inspect -- --namespace user
 npm run inspect -- --tag product --json
 ```
 
-メニューバーアプリで保存内容を管理:
+## Desktop App
 
 ```bash
-npm run build
-npm --prefix native/electron install
+npm install
 npm run app
 ```
 

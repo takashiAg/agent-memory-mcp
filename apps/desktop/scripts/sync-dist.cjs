@@ -3,8 +3,8 @@ const path = require("node:path");
 
 const appDir = path.resolve(__dirname, "..");
 const rootDir = path.resolve(appDir, "../..");
-const source = path.join(rootDir, "dist");
-const target = path.join(appDir, "vendor/dist");
+const source = path.join(rootDir, "packages/core/dist");
+const target = path.join(appDir, "vendor/core");
 
 rmSync(target, { recursive: true, force: true });
 mkdirSync(path.dirname(target), { recursive: true });
