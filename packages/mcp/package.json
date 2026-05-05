@@ -1,0 +1,25 @@
+{
+  "name": "agent-memory-mcp",
+  "version": "1.0.0",
+  "description": "Local MCP memory server backed by SQLite.",
+  "type": "module",
+  "bin": {
+    "agent-memory-mcp": "dist/server.js",
+    "agent-memory-inspect": "dist/inspect.js"
+  },
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "inspect": "node dist/inspect.js",
+    "start": "node dist/server.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@agent-memory-mcp/core": "1.0.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

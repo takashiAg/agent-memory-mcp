@@ -1,23 +1,24 @@
 {
-  "name": "agent-memory-mcp",
+  "name": "agent-memory-mcp-workspace",
   "version": "1.0.0",
+  "private": true,
   "description": "The Model 型 SaaS の業務文脈を、Codex や Claude Code などの MCP 対応エージェントへ引き継ぐためのローカルメモリです。",
   "type": "module",
-  "bin": {
-    "agent-memory-mcp": "dist/server.js"
-  },
-  "main": "dist/server.js",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "build": "tsc --noEmit false",
-    "inspect": "node dist/inspect.js",
-    "app": "npm --prefix native/electron run dev",
-    "app:build": "npm --prefix native/electron run dist",
-    "lint:md": "npx markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
-    "typecheck": "tsc --noEmit",
-    "start": "node dist/server.js"
+    "build": "npm run build --workspaces --if-present",
+    "inspect": "npm run inspect --workspace agent-memory-mcp --",
+    "app": "npm run dev --workspace @agent-memory-mcp/desktop",
+    "app:build": "npm run dist --workspace @agent-memory-mcp/desktop",
+    "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "start": "npm run start --workspace agent-memory-mcp"
   },
   "repository": {
     "type": "git",
@@ -30,12 +31,9 @@
     "url": "https://github.com/takashiAg/agent-memory-mcp/issues"
   },
   "homepage": "https://github.com/takashiAg/agent-memory-mcp#readme",
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "zod": "^4.4.3"
-  },
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "markdownlint-cli2": "^0.22.1",
     "typescript": "^6.0.3"
   },
   "engines": {

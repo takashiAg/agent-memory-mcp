@@ -10,8 +10,8 @@ const rootDir = path.resolve(__dirname, "../..");
 async function loadStorage() {
   if (!storage) {
     const storageModulePath = app.isPackaged
-      ? path.join(__dirname, "vendor/dist/storage.js")
-      : path.join(rootDir, "dist/storage.js");
+      ? path.join(__dirname, "vendor/core/storage.js")
+      : path.join(rootDir, "packages/core/dist/storage.js");
     const module = await import(storageModulePath);
     storage = new module.MemoryStorage();
   }
