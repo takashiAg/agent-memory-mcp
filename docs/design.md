@@ -6,7 +6,7 @@
 
 主な項目:
 
-- `namespace`: `global`、`user`、`repo:owner/name` などのスコープ
+- `namespace`: `user`、`project:<name>`、`repo:owner/name` などのスコープ
 - `key`: 更新対象を識別する安定した名前
 - `value`: 保存する本文
 - `tags`: 検索用タグ
