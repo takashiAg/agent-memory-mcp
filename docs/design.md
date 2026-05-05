@@ -43,6 +43,14 @@ DB の既定パス:
 AGENT_MEMORY_DB_PATH=/path/to/memory.sqlite
 ```
 
+## 技術スタック
+
+- TypeScript
+- Node.js
+- SQLite
+- SQLite FTS5
+- MCP stdio transport
+
 ## MCP ツール
 
 初期実装:

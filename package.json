@@ -1,0 +1,40 @@
+{
+  "name": "agent-memory-mcp",
+  "version": "1.0.0",
+  "description": "The Model 型 SaaS の業務文脈を、Codex や Claude Code などの MCP 対応エージェントへ引き継ぐためのローカルメモリです。",
+  "type": "module",
+  "bin": {
+    "agent-memory-mcp": "dist/server.js"
+  },
+  "main": "dist/server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "tsc --noEmit false",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takashiAg/agent-memory-mcp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/takashiAg/agent-memory-mcp/issues"
+  },
+  "homepage": "https://github.com/takashiAg/agent-memory-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
