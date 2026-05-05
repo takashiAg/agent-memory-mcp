@@ -56,6 +56,14 @@ args = ["/path/to/agent-memory-mcp/dist/server.js"]
 enabled = true
 ```
 
+保存内容の確認:
+
+```bash
+npm run inspect
+npm run inspect -- --namespace user
+npm run inspect -- --tag product --json
+```
+
 ## 想定ツール
 
 - `remember`: メモリを保存・更新する

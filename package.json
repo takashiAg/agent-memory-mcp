@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "tsc --noEmit false",
+    "inspect": "node dist/inspect.js",
     "typecheck": "tsc --noEmit",
     "start": "node dist/server.js"
   },
