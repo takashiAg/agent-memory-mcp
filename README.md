@@ -64,6 +64,22 @@ npm run inspect -- --namespace user
 npm run inspect -- --tag product --json
 ```
 
+メニューバーアプリで保存内容を管理:
+
+```bash
+npm run build
+npm --prefix native/electron install
+npm run app
+```
+
+macOS の上部メニューバーに `Agent Memory` が常駐し、クリックすると保存済みメモリを一覧・検索・作成・編集・削除できます。
+
+配布用ビルド:
+
+```bash
+npm run app:build
+```
+
 ## 想定ツール
 
 - `remember`: メモリを保存・更新する

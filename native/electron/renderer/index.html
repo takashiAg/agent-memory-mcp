@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Memory</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="head">
+        <h1>Agent Memory</h1>
+        <button id="newMemory" class="primary">New</button>
+      </div>
+      <input id="query" type="search" placeholder="Search">
+      <div class="filters">
+        <input id="namespaceFilter" type="text" placeholder="Namespace">
+        <input id="tagFilter" type="text" placeholder="Tag">
+        <select id="priorityFilter">
+          <option value="">All priority</option>
+          <option value="rule">rule</option>
+          <option value="preference">preference</option>
+          <option value="note">note</option>
+        </select>
+      </div>
+      <div class="meta">
+        <span id="count"></span>
+        <button id="reload">Reload</button>
+      </div>
+      <div id="list" class="list"></div>
+    </aside>
+    <main>
+      <div class="toolbar">
+        <div class="title">
+          <h2 id="title">Select a memory</h2>
+          <p id="subtitle"></p>
+        </div>
+        <div class="actions">
+          <button id="copy" disabled>Copy</button>
+          <button id="edit" disabled>Edit</button>
+          <button id="delete" class="danger" disabled>Delete</button>
+        </div>
+      </div>
+      <section id="detail" class="detail empty">No memory selected.</section>
+      <footer>
+        <button id="openDb">Show DB</button>
+        <span id="dbPath"></span>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="editor">
+    <form method="dialog" id="editorForm">
+      <div class="dialogHead">
+        <h3 id="editorTitle">New memory</h3>
+        <button value="cancel">Cancel</button>
+      </div>
+      <label>Namespace<input id="namespaceInput" required></label>
+      <label>Key<input id="keyInput"></label>
+      <label>Priority
+        <select id="priorityInput">
+          <option value="note">note</option>
+          <option value="preference">preference</option>
+          <option value="rule">rule</option>
+        </select>
+      </label>
+      <label>Tags<input id="tagsInput" placeholder="comma separated"></label>
+      <label>Source<input id="sourceInput"></label>
+      <label>Expires at<input id="expiresInput" placeholder="ISO timestamp"></label>
+      <label class="wide">Value<textarea id="valueInput" required></textarea></label>
+      <div id="error" class="error"></div>
+      <div class="dialogActions">
+        <button id="save" value="default" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>
