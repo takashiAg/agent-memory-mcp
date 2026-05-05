@@ -32,3 +32,14 @@ export type RememberInput = {
   source?: string;
   expires_at?: string;
 };
+
+export type UpdateMemoryInput = {
+  id: string;
+  namespace?: string;
+  key?: string;
+  value?: string;
+  tags?: string[];
+  priority?: MemoryPriority;
+  source?: string;
+  expires_at?: string;
+};

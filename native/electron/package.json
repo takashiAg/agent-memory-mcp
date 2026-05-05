@@ -1,0 +1,34 @@
+{
+  "name": "agent-memory-mcp-menubar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Menu bar memory manager for agent-memory-mcp.",
+  "main": "main.cjs",
+  "scripts": {
+    "dev": "npm --prefix ../.. run build && electron .",
+    "sync-dist": "node scripts/sync-dist.cjs",
+    "dist": "npm --prefix ../.. run build && npm run sync-dist && electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^37.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "dev.agent-memory-mcp.menubar",
+    "productName": "Agent Memory",
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "vendor/dist/**",
+      "renderer/**",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    }
+  }
+}

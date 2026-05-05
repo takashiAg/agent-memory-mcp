@@ -13,6 +13,9 @@
   "scripts": {
     "build": "tsc --noEmit false",
     "inspect": "node dist/inspect.js",
+    "app": "npm --prefix native/electron run dev",
+    "app:build": "npm --prefix native/electron run dist",
+    "lint:md": "npx markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
     "typecheck": "tsc --noEmit",
     "start": "node dist/server.js"
   },

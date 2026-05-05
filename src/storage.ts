@@ -4,7 +4,7 @@ import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { detectSecret } from "./secretGuard.js";
-import type { Memory, MemorySummary, RememberInput } from "./types.js";
+import type { Memory, MemorySummary, RememberInput, UpdateMemoryInput } from "./types.js";
 
 type MemoryRow = Omit<Memory, "tags">;
 
@@ -99,6 +99,56 @@ export class MemoryStorage {
       .slice(0, limit);
 
     return { results: rows.map(toSummary) };
+  }
+
+  listDetailed(input: { namespace?: string; tags?: string[]; include_expired?: boolean; limit?: number }): { results: Memory[] } {
+    const limit = clamp(input.limit ?? 100, 1, 1000);
+    const rows = this.listRows(input.namespace, limit * 4)
+      .filter((memory) => input.include_expired || !isExpired(memory))
+      .filter((memory) => hasTags(memory.tags, input.tags))
+      .slice(0, limit);
+
+    return { results: rows };
+  }
+
+  update(input: UpdateMemoryInput): { id: string; namespace: string; key?: string; updated: boolean } {
+    const existing = this.findById(input.id);
+    if (!existing) {
+      throw new Error("memory not found");
+    }
+
+    const value = input.value ?? existing.value;
+    const secretReason = detectSecret(value);
+    if (secretReason) {
+      this.recordEvent(input.id, "rejected_secret", secretReason);
+      throw new Error("memory rejected because it looks like a secret");
+    }
+
+    const namespace = input.namespace ?? existing.namespace;
+    const key = input.key === undefined ? existing.key : input.key || null;
+    const tags = normalizeTags(input.tags ?? existing.tags);
+    const priority = input.priority ?? existing.priority;
+    const source = input.source === undefined ? existing.source : input.source || null;
+    const expiresAt = input.expires_at === undefined ? existing.expires_at : input.expires_at || null;
+    const now = new Date().toISOString();
+
+    this.db.exec("BEGIN");
+    try {
+      this.db.prepare(`
+        UPDATE memories
+        SET namespace = ?, key = ?, value = ?, priority = ?, source = ?, updated_at = ?, expires_at = ?
+        WHERE id = ?
+      `).run(namespace, key, value, priority, source, now, expiresAt, input.id);
+      this.replaceTags(input.id, tags);
+      this.replaceFts({ id: input.id, namespace, key, value, tags });
+      this.recordEvent(input.id, "updated", null);
+      this.db.exec("COMMIT");
+    } catch (error) {
+      this.db.exec("ROLLBACK");
+      throw error;
+    }
+
+    return { id: input.id, namespace, key: key ?? undefined, updated: true };
   }
 
   forget(input: { id?: string; namespace?: string; key?: string }): { deleted: boolean; id?: string } {

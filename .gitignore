@@ -1,5 +1,7 @@
 node_modules/
 dist/
+native/electron/dist/
+native/electron/vendor/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
